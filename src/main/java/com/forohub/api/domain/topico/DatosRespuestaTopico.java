@@ -14,7 +14,7 @@ public record DatosRespuestaTopico(
         LocalDateTime fechaDeActualizacion
 ) {
     public DatosRespuestaTopico(Topico topico){
-        this(topico.getId(), topico.getUsuario().getId(), topico.getCurso(), topico.getTitulo(),
+        this(topico.getId(), topico.getAutorTopico().getId(), topico.getCurso(), topico.getTitulo(),
                 topico.getMensaje(),topico.getEstado(),topico.getFechaDeCreacion(),topico.getFechaDeActualizacion());
     }
 }

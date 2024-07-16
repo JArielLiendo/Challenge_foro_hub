@@ -37,7 +37,7 @@ public class VerificacionService {
     public Topico validarTopicoActivo(Long id){
         Topico topico=validarExistenciaTopico(id);
         if (topico.getEstado() == Estado.DESACTIVADO){
-            throw new ValidacionDeExixtencia("Topico DESACTIVADO");
+            throw new ValidacionDeExixtencia("No se pueden realizar consultas sobre Topicos DESACTIVADOS");
         }
         return topico;
     }
@@ -51,7 +51,7 @@ public class VerificacionService {
     public Respuesta verificarRespuestaTopicoActivo(Long id){
         Respuesta respuesta=verificarExistenciaRespuesta(id);
         if (respuesta.getTopico().getEstado()!=Estado.ACTIVO){
-            throw new ValidacionDeExixtencia("Topico DESACTIVADO para esta Respuesta");
+            throw new ValidacionDeExixtencia("No se puede mostrar respuestas para topicos DESACTIVADOS");
         }
         return respuesta;
     }

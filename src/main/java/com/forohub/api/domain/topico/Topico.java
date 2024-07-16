@@ -21,21 +21,19 @@ public class Topico {
     private Long id;
     private String titulo;
     private String mensaje;
-    @Column(columnDefinition = "DATETIME(0)")
     private LocalDateTime fechaDeCreacion;
-    @Column(columnDefinition = "DATETIME(0)")
     private LocalDateTime fechaDeActualizacion;
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "autor_topico_id")
+    private Usuario autorTopico;
 
     @Enumerated(EnumType.STRING)
     private Curso curso;
 
-    @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Respuesta> respuestas;
 
     public Topico(DatosRegistroTopico datos,Usuario usuario){
@@ -43,7 +41,7 @@ public class Topico {
         this.mensaje=datos.mensaje();
         this.fechaDeCreacion=LocalDateTime.now();
         this.estado=Estado.ACTIVO;
-        this.usuario=usuario;
+        this.autorTopico =usuario;
         this.curso=datos.curso();
     }
     public void actualizarTopico(DatosActualizarTopico datos){

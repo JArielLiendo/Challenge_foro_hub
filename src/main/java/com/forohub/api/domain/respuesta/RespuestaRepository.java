@@ -14,4 +14,6 @@ public interface RespuestaRepository extends JpaRepository<Respuesta, Long> {
     Respuesta seleccionarRespuestaPorTopicoActivo(Long id);
     @Query("SELECT r FROM Respuesta r WHERE r.topico.id=:id AND r.topico.estado=ACTIVO")
     List<Respuesta> listarRespuestaPorTopico(Long id);
+    @Query("SELECT r FROM Respuesta r WHERE r.autorRespuesta.id=:id")
+    List<Respuesta> listarRespuestasPorUsuario(Long id);
 }

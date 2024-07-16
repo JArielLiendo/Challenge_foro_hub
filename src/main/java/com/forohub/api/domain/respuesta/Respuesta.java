@@ -25,10 +25,6 @@ public class Respuesta {
     private LocalDateTime fechaDeCreacion;
 
     @ManyToOne
-    @JoinColumn(name = "autor_topico_id")
-    private Usuario autorTopico;
-
-    @ManyToOne
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
@@ -40,7 +36,6 @@ public class Respuesta {
         this.mensaje= topico.getMensaje();
         this.solucion=datos.solucion();
         this.fechaDeCreacion=LocalDateTime.now();
-        this.autorTopico=topico.getUsuario();
         this.topico=topico;
         this.autorRespuesta=usuario;
 

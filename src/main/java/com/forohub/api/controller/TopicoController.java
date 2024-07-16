@@ -70,7 +70,7 @@ public class TopicoController {
     @Transactional
     public ResponseEntity eliminarTopico(@PathVariable Long id){
         Topico topico= verificacionService.validarExistenciaTopico(id);
-        topicoRepository.deleteById(topico.getId());
+        topicoRepository.delete(topico);
         return ResponseEntity.noContent().build();
     }
 

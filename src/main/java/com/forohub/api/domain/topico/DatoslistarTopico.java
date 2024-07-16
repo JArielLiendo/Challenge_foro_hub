@@ -11,7 +11,7 @@ public record DatoslistarTopico(
 
 ) {
     public DatoslistarTopico(Topico topico){
-        this(topico.getTitulo(), topico.getMensaje(), topico.getUsuario().getNombre(),
+        this(topico.getTitulo(), topico.getMensaje(), topico.getAutorTopico().getNombre(),
                 topico.getCurso(),topico.getFechaDeCreacion());
     }
 }

@@ -62,6 +62,22 @@ public class RespuestaController {
         return ResponseEntity.ok(listaDeRespuestasPorTopico.stream().map(DatosRetornoRespuesta::new).toList());
     }
 
+    @GetMapping("/respuestasporusuario/{id}")
+    public ResponseEntity<List<DatosRetornoRespuesta>>listarRespuestasPorUsuario(@PathVariable Long id){
+        Usuario usuario=verificacionService.validarUsuarioExistente(id);
+        List<Respuesta>listaRespuestasPorUsuario=respuestasRepository.listarRespuestasPorUsuario(id);
+        return ResponseEntity.ok(listaRespuestasPorUsuario.stream().map(DatosRetornoRespuesta::new).toList());
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity eliminarRespusta(@PathVariable Long id){
+        Respuesta respuesta=verificacionService.verificarExistenciaRespuesta(id);
+        respuestasRepository.deleteById(respuesta.getId());
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 
 }
