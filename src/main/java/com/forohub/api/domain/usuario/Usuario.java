@@ -28,10 +28,10 @@ public class Usuario implements UserDetails {
     private String password;
     private String email;
 
-    @OneToMany(mappedBy = "autorTopico", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "autorTopico", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Topico> topicos;
 
-    @OneToMany(mappedBy = "autorRespuesta", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "autorRespuesta", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Respuesta> respuestas;
 
 
