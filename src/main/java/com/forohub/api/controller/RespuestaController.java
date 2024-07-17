@@ -4,7 +4,6 @@ import com.forohub.api.domain.respuesta.DatosRegistroRespuesta;
 import com.forohub.api.domain.respuesta.DatosRetornoRespuesta;
 import com.forohub.api.domain.respuesta.Respuesta;
 import com.forohub.api.domain.respuesta.RespuestaRepository;
-import com.forohub.api.domain.topico.Estado;
 import com.forohub.api.domain.topico.Topico;
 import com.forohub.api.domain.topico.TopicoRepository;
 import com.forohub.api.verificacionservice.VerificacionService;
@@ -22,7 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/respuestas")

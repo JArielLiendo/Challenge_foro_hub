@@ -70,7 +70,6 @@ public class TopicoController {
     @Transactional
     public ResponseEntity eliminarTopico(@PathVariable Long id){
         Topico topico= verificacionService.validarExistenciaTopico(id);
-        //topicoRepository.delete(topico);
         topico.desactivarTopico();
         return ResponseEntity.noContent().build();
     }
@@ -78,7 +77,6 @@ public class TopicoController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity actualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datosActualizarTopico){
-
         Topico topico= verificacionService.validarExistenciaTopico(id);
         topico.actualizarTopico(datosActualizarTopico);
         return ResponseEntity.ok(new DatosRespuestaTopico(topico));
