@@ -4,22 +4,25 @@ import com.forohub.api.domain.respuesta.DatosRegistroRespuesta;
 import com.forohub.api.domain.respuesta.DatosRetornoRespuesta;
 import com.forohub.api.domain.respuesta.Respuesta;
 import com.forohub.api.domain.respuesta.RespuestaRepository;
+import com.forohub.api.domain.topico.Estado;
 import com.forohub.api.domain.topico.Topico;
 import com.forohub.api.domain.topico.TopicoRepository;
 import com.forohub.api.verificacionservice.VerificacionService;
 import com.forohub.api.domain.usuario.Usuario;
-import jakarta.transaction.Transactional;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/respuestas")
@@ -51,8 +54,8 @@ public class RespuestaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DatosRetornoRespuesta>listarRespuestaPorId(@PathVariable Long id){
-        Respuesta respuesta=verificacionService.verificarRespuestaTopicoActivo(id);
+    public ResponseEntity<DatosRetornoRespuesta>mostrarRespuestaPorId(@PathVariable Long id){
+        Respuesta respuesta=verificacionService.verificarRespuestaActiva(id);
         return ResponseEntity.ok(new DatosRetornoRespuesta(respuesta));
     }
     @GetMapping("/respuestasportopico/{id}")
@@ -73,7 +76,7 @@ public class RespuestaController {
     @Transactional
     public ResponseEntity eliminarRespusta(@PathVariable Long id){
         Respuesta respuesta=verificacionService.verificarExistenciaRespuesta(id);
-        respuestasRepository.deleteById(respuesta.getId());
+        respuesta.desactivarRespuesta();
         return ResponseEntity.noContent().build();
     }
 

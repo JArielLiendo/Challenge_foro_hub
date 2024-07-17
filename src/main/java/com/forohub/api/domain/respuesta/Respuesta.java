@@ -1,5 +1,6 @@
 package com.forohub.api.domain.respuesta;
 
+import com.forohub.api.domain.topico.Estado;
 import com.forohub.api.domain.topico.Topico;
 import com.forohub.api.domain.usuario.Usuario;
 import jakarta.persistence.*;
@@ -22,7 +23,10 @@ public class Respuesta {
     private Long id;
     private String mensaje;
     private String solucion;
+    @Column(columnDefinition = "DATETIME(0)")
     private LocalDateTime fechaDeCreacion;
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
 
     @ManyToOne
     @JoinColumn(name = "topico_id")
@@ -36,9 +40,13 @@ public class Respuesta {
         this.mensaje= topico.getMensaje();
         this.solucion=datos.solucion();
         this.fechaDeCreacion=LocalDateTime.now();
+        this.estado=Estado.ACTIVO;
         this.topico=topico;
         this.autorRespuesta=usuario;
 
+    }
+    public void desactivarRespuesta(){
+        this.estado=Estado.DESACTIVADO;
     }
 
 }

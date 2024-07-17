@@ -70,13 +70,14 @@ public class TopicoController {
     @Transactional
     public ResponseEntity eliminarTopico(@PathVariable Long id){
         Topico topico= verificacionService.validarExistenciaTopico(id);
-        topicoRepository.delete(topico);
+        //topicoRepository.delete(topico);
+        topico.desactivarTopico();
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity desactivarActualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datosActualizarTopico){
+    public ResponseEntity actualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datosActualizarTopico){
 
         Topico topico= verificacionService.validarExistenciaTopico(id);
         topico.actualizarTopico(datosActualizarTopico);

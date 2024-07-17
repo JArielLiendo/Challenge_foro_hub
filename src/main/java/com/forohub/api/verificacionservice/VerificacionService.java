@@ -48,10 +48,18 @@ public class VerificacionService {
         return respuestaRepository.getReferenceById(id);
 
     }
+
     public Respuesta verificarRespuestaTopicoActivo(Long id){
         Respuesta respuesta=verificarExistenciaRespuesta(id);
-        if (respuesta.getTopico().getEstado()!=Estado.ACTIVO){
+        if (respuesta.getTopico().getEstado()==Estado.DESACTIVADO){
             throw new ValidacionDeExixtencia("No se puede mostrar respuestas para topicos DESACTIVADOS");
+        }
+        return respuesta;
+    }
+    public Respuesta verificarRespuestaActiva(Long id){
+        Respuesta respuesta=verificarRespuestaTopicoActivo(id);
+        if (respuesta.getEstado()==Estado.DESACTIVADO){
+            throw new ValidacionDeExixtencia("No se puede realizar consultas para respuestas DESACTIVADAS");
         }
         return respuesta;
     }

@@ -21,7 +21,9 @@ public class Topico {
     private Long id;
     private String titulo;
     private String mensaje;
+    @Column(columnDefinition = "DATETIME(0)")
     private LocalDateTime fechaDeCreacion;
+    @Column(columnDefinition = "DATETIME(0)")
     private LocalDateTime fechaDeActualizacion;
     @Enumerated(EnumType.STRING)
     private Estado estado;
@@ -58,6 +60,10 @@ public class Topico {
         if (datos.titulo()!=null || datos.mensaje()!=null ){
             this.fechaDeActualizacion= LocalDateTime.now();
         }
+        }
+
+        public void desactivarTopico(){
+        this.estado=Estado.DESACTIVADO;
         }
 
     }
